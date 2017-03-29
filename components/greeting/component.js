@@ -4,14 +4,13 @@ function loadJavascriptApi () {
   scriptEl.src= '/static/jsapi.js'
   document.body.appendChild(scriptEl)
   scriptEl.addEventListener('load', () => {
+    console.log('component has loaded')
   })
 }
 
-module.exports = require('marko-widgets').defineComponent({
-  template: require('./template.marko'),
-
-  getInitialState: function (input) {
-    return {
+module.exports = {
+  onInput: function (input) {
+    this.state = {
       buttonLoaded: input.buttonLoaded
     }
   },
@@ -20,4 +19,4 @@ module.exports = require('marko-widgets').defineComponent({
     loadJavascriptApi()
     this.setState('buttonLoaded', true)
   }
-})
+}

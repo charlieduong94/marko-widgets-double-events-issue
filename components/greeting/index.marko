@@ -1,6 +1,6 @@
-div w-bind
-  if(!data.buttonLoaded)
+div
+  if(!state.buttonLoaded)
     label
       -- Hey, click that button to load in the counter
-    button w-onClick='handleLoadClick'
+    button onClick('handleLoadClick')
       -- Load Button

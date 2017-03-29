@@ -1,33 +1,50 @@
-function create(__helpers) {
-  var str = __helpers.s,
-      empty = __helpers.e,
-      notEmpty = __helpers.ne,
-      escapeXml = __helpers.x,
-      __browser_json = require.resolve("./browser.json"),
-      __loadTag = __helpers.t,
-      lasso_page_tag = __loadTag(require("lasso/taglib/config-tag")),
-      lasso_head_tag = __loadTag(require("lasso/taglib/head-tag")),
-      lasso_body_tag = __loadTag(require("lasso/taglib/body-tag"));
+// Compiled using marko@4.2.0 - DO NOT EDIT
+"use strict";
 
-  return function render(data, out) {
-    out.w("<!DOCTYPE html>");
+var marko_template = module.exports = require("marko/html").t(__filename),
+    __browser_json = require.resolve("./browser.json"),
+    marko_helpers = require("marko/runtime/html/helpers"),
+    marko_loadTag = marko_helpers.t,
+    lasso_page_tag = marko_loadTag(require("lasso/taglib/config-tag")),
+    lasso_head_tag = marko_loadTag(require("lasso/taglib/head-tag")),
+    lasso_body_tag = marko_loadTag(require("lasso/taglib/body-tag")),
+    await_reorderer_tag = marko_loadTag(require("marko/taglibs/async/await-reorderer-tag")),
+    init_components_tag = marko_loadTag(require("marko/components/taglib/init-components-tag"));
 
-    lasso_page_tag({
-        packagePath: __browser_json,
-        dirname: __dirname,
-        filename: __filename
-      }, out);
+function render(input, out) {
+  var data = input;
 
-    out.w("<html><head><title>Duplicate widgets demo</title>");
+  out.w("<!DOCTYPE html>");
 
-    lasso_head_tag({}, out);
+  lasso_page_tag({
+      packagePath: __browser_json,
+      dirname: __dirname,
+      filename: __filename
+    }, out);
 
-    out.w("</head><body>");
+  out.w("<html><head><title>Duplicate widgets demo</title>");
 
-    lasso_body_tag({}, out);
+  lasso_head_tag({}, out);
 
-    out.w("<browser-refresh enabled></browser-refresh></body></html>");
-  };
+  out.w("</head><body>");
+
+  lasso_body_tag({}, out);
+
+  await_reorderer_tag({}, out);
+
+  init_components_tag({}, out);
+
+  out.w("</body></html>");
 }
 
-(module.exports = require("marko").c(__filename)).c(create);
+marko_template._ = render;
+
+marko_template.meta = {
+    tags: [
+      "lasso/taglib/config-tag",
+      "lasso/taglib/head-tag",
+      "lasso/taglib/body-tag",
+      "marko/taglibs/async/await-reorderer-tag",
+      "marko/components/taglib/init-components-tag"
+    ]
+  };
